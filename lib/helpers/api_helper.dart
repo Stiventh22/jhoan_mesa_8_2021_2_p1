@@ -17,6 +17,7 @@ class ApiHelper {
 
     var body = response.body;
     if (response.statusCode >= 400) {
+      String body = utf8.decode(response.bodyBytes);
       return Response(message: body);
     }
 

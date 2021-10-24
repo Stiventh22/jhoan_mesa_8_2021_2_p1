@@ -71,10 +71,10 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[50],
+      backgroundColor: Colors.yellow[300],
       appBar: AppBar(
-        backgroundColor: Colors.indigo[300],
-        title: Text('Paises'),
+        backgroundColor: Colors.red[400],
+        title: Text('Countries'),
       ),
       body: Center(
         child: _getBody(),
@@ -90,25 +90,26 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(100),
-              // child: CachedNetworkImage(
-              //   imageUrl: '${_flags[1]}',
-              //   errorWidget: (context, url, error) => Icon(Icons.error),
-              //   fit: BoxFit.cover,
-              //   height: 100,
-              //   width: 100,
-              //   placeholder: (context, url) => Image(
-              //     image: AssetImage('assets/noimage.png'),
-              //     fit: BoxFit.cover,
-              //     height: 100,
-              //     width: 100,
-              //   ),
-              // ),
+              child: CachedNetworkImage(
+                imageUrl: 'https://static.thenounproject.com/png/75231-200.png',
+                errorWidget: (context, url, error) => Icon(Icons.error),
+                fit: BoxFit.cover,
+                height: 100,
+                width: 100,
+                placeholder: (context, url) => Image(
+                  image: NetworkImage(
+                      'https://static.thenounproject.com/png/75231-200.png'),
+                  fit: BoxFit.cover,
+                  height: 100,
+                  width: 100,
+                ),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '\n name: ${_name} \n',
+                  'name: ${_name}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -119,7 +120,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'alpha2Code: ${_alpha2Code} \n',
+                  'alpha2Code: ${_alpha2Code}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -130,7 +131,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'alpha3Code: ${_alpha3Code} \n',
+                  'alpha3Code: ${_alpha3Code}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -141,7 +142,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'capital: ${_capital} \n',
+                  'capital: ${_capital}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -152,7 +153,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'subregion: ${_subregion} \n',
+                  'subregion: ${_subregion}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -163,7 +164,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'region: ${_region} \n',
+                  'region: ${_region}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -174,7 +175,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'population: ${_population} \n',
+                  'population: ${_population}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -185,7 +186,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'demonym: ${_demonym} \n',
+                  'demonym: ${_demonym}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -196,7 +197,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'area: ${_area} \n',
+                  'area: ${_area}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -207,7 +208,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'nativeName: ${_nativeName} \n',
+                  'nativeName: ${_nativeName}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -218,7 +219,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'numericCode: ${_numericCode} \n',
+                  'numericCode: ${_numericCode}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -229,7 +230,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'cioc: ${_cioc} \n',
+                  'cioc: ${_cioc}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -240,7 +241,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'independent: ${_independent} \n',
+                  'independent: ${_independent}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -251,9 +252,8 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Cordenadas: \n' +
-                      '            ● name: ${_latlng[0]}\n' +
-                      '            ● acronym: ${_latlng[1]}\n',
+                  'Cordenadas: name: ${_latlng[0]}' +
+                      'acronym: ${_latlng[1]}\n',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -264,8 +264,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'topLevelDomain: \n' +
-                      '            ● name: ${_topLevelDomain[0]}\n',
+                  'topLevelDomain: ' + 'name: ${_topLevelDomain[0]}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -276,8 +275,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'callingCodes: \n' +
-                      '            ● name: ${_callingCodes[0]}\n',
+                  'callingCodes: ' + 'name: ${_callingCodes[0]}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -288,8 +286,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'altSpellings: \n' +
-                      '            ● name: ${_altSpellings[0]}\n',
+                  'altSpellings:' + 'name: ${_altSpellings[0]}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -300,7 +297,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'timezones: ${_timezones[0]} \n',
+                  'timezones: ${_timezones[0]}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -311,9 +308,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'borders: \n' +
-                      '            ● name: ${_borders[0]}\n' +
-                      '            ● name: ${_borders[1]}\n',
+                  'borders: ' + 'name: ${_borders[0]}' + 'name: ${_borders[1]}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -324,7 +319,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'currencies: \n' + '            ● name: ${_currencies[0]}\n',
+                  'currencies: ' + 'name: ${_currencies[0]}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -335,7 +330,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'lenguages: \n' + '            ● name: ${_languages[0]}\n',
+                  'lenguages: ' + 'name: ${_languages[0]}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -346,8 +341,7 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'regionalBlocs: \n' +
-                      '            ● name: ${_regionalBlocs[0]}\n',
+                  'regionalBlocs:' + 'name: ${_regionalBlocs[0]}',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -358,18 +352,18 @@ class _InfoCountriesScreenState extends State<InfoCountriesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'translations: \n' +
-                      '            ● br: ${_translations[0]}\n' +
-                      '            ● pt: ${_translations[1]}\n' +
-                      '            ● nl: ${_translations[2]}\n' +
-                      '            ● hr: ${_translations[3]}\n' +
-                      '            ● fa: ${_translations[4]}\n' +
-                      '            ● de: ${_translations[5]}\n' +
-                      '            ● es: ${_translations[6]}\n' +
-                      '            ● fr: ${_translations[7]}\n' +
-                      '            ● ja: ${_translations[8]}\n' +
-                      '            ● it: ${_translations[9]}\n' +
-                      '            ● hu: ${_translations[10]}\n',
+                  'translations: ' +
+                      'br: ${_translations[0]}' +
+                      'pt: ${_translations[1]}' +
+                      'nl: ${_translations[2]}' +
+                      'hr: ${_translations[3]}' +
+                      'fa: ${_translations[4]}' +
+                      'de: ${_translations[5]}' +
+                      'es: ${_translations[6]}' +
+                      'fr: ${_translations[7]}' +
+                      'ja: ${_translations[8]}' +
+                      'it: ${_translations[9]}' +
+                      'hu: ${_translations[10]}',
                   style: TextStyle(
                     fontSize: 20,
                   ),

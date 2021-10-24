@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -33,21 +34,19 @@ class _CountriesScreenState extends State<CountriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[50],
+      backgroundColor: Colors.yellow[300],
       appBar: AppBar(
-        backgroundColor: Colors.indigo[300],
-        title: Text('Paises'),
+        backgroundColor: Colors.red[400],
+        title: Text('Countries'),
         actions: <Widget>[
           _isFiltered
-              ? IconButton(
-                  onPressed: _removeFilter, icon: Icon(Icons.filter_none))
+              ? IconButton(onPressed: _removeFilter, icon: Icon(Icons.undo))
               : IconButton(onPressed: _showFilter, icon: Icon(Icons.filter_alt))
         ],
       ),
       body: Center(
-        child: _showLoader
-            ? LoaderComponent(text: 'Por favor espere...')
-            : _getContent(),
+        child:
+            _showLoader ? LoaderComponent(text: 'Loading...') : _getContent(),
       ),
     );
   }
@@ -65,9 +64,9 @@ class _CountriesScreenState extends State<CountriesScreen> {
       await showAlertDialog(
           context: context,
           title: 'Error',
-          message: 'Verifica que estes conectado a internet.',
+          message: 'validate your internet connection...',
           actions: <AlertDialogAction>[
-            AlertDialogAction(key: null, label: 'Aceptar'),
+            AlertDialogAction(key: null, label: 'Accept'),
           ]);
       return;
     }
@@ -93,9 +92,9 @@ class _CountriesScreenState extends State<CountriesScreen> {
         margin: EdgeInsets.all(20),
         child: Text(
           _isFiltered
-              ? 'No hay paises con ese criterio de búsqueda.'
-              : 'No hay paises registradas.',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ? 'there are no countries with that sequence of letters'
+              : 'no registered countries...',
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -108,45 +107,65 @@ class _CountriesScreenState extends State<CountriesScreen> {
         children: _countries.map((e) {
           return Card(
             child: InkWell(
-              onTap: () => _goEdit(e),
+              onTap: () => _goInf(e),
               child: Container(
-                margin: EdgeInsets.all(10),
-                padding: EdgeInsets.all(5),
-                child: Column(
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(5),
+                child: Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Pais: ${e.name}',
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(40),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            'https://static.thenounproject.com/png/75231-200.png',
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        fit: BoxFit.cover,
+                        height: 80,
+                        width: 80,
+                        placeholder: (context, url) => const Image(
+                          image: NetworkImage(
+                              'https://www.kananss.com/wp-content/uploads/2021/06/51-519068_loader-loading-progress-wait-icon-loading-icon-png-1.png'),
+                          fit: BoxFit.cover,
+                          height: 80,
+                          width: 80,
                         ),
-                      ],
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Capital: ${e.capital}',
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Text(
+                                  'Pais: ${e.name}',
+                                  style: const TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  'Capital: ${e.capital}',
+                                  style: const TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        // ClipRRect(
-                        //   borderRadius: BorderRadius.circular(25),
-                        //   child: CachedNetworkImage(
-                        //     imageUrl: '${e.flags[0]}',
-                        //     errorWidget: (context, url, error) => Icon(Icons.error),
-                        //     fit: BoxFit.cover,
-                        //     height: 25,
-                        //     width: 25,
-                        //     placeholder: (context, url) => Image(
-                        //       image: AssetImage('assets/noimage.png'),
-                        //       fit: BoxFit.cover,
-                        //       height: 25,
-                        //       width: 25,
-                        //     ),
-                        //   ),
-                        // ),
-                        Icon(Icons.arrow_forward_ios),
-                      ],
+                      ),
                     ),
+                    const Icon(Icons.arrow_forward_ios),
                   ],
                 ),
               ),
@@ -172,19 +191,19 @@ class _CountriesScreenState extends State<CountriesScreen> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            title: Text('Filtrar Paises'),
+            title: Text('filter countries:'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Text('Escriba las primeras letras del pais'),
+                Text('enter the first letters...'),
                 SizedBox(
                   height: 10,
                 ),
                 TextField(
                   autofocus: true,
                   decoration: InputDecoration(
-                      hintText: 'Criterio de búsqueda...',
-                      labelText: 'Buscar',
+                      hintText: 'search model...',
+                      labelText: 'search',
                       suffixIcon: Icon(Icons.search)),
                   onChanged: (value) {
                     _search = value;
@@ -195,8 +214,8 @@ class _CountriesScreenState extends State<CountriesScreen> {
             actions: <Widget>[
               TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: Text('Cancelar')),
-              TextButton(onPressed: () => _filter(), child: Text('Filtrar')),
+                  child: Text('Cancel')),
+              TextButton(onPressed: () => _filter(), child: Text('Filter')),
             ],
           );
         });
@@ -222,7 +241,7 @@ class _CountriesScreenState extends State<CountriesScreen> {
     Navigator.of(context).pop();
   }
 
-  void _goEdit(Country country) async {
+  void _goInf(Country country) async {
     String? result = await Navigator.push(
         context,
         MaterialPageRoute(
